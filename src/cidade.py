@@ -5,6 +5,7 @@ class Cidade:
         self.pontoX = 0
         self.pontoY = 0
         self.id = 0
+        self.conexoes = list()
     
     def setCoordenada(self):
         self.pontoX = random.randint(1,100)
