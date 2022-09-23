@@ -32,6 +32,13 @@ class GeradorCidades:
 
             for c in range(0, qtdeConexoes):
                 while True:
+                    possibilidade = False
+                    for i in range((cidade.id + 1), self.qtdeCidade):
+                        if not i in cidade.conexoes:
+                            possibilidade = True
+                    if not possibilidade:
+                        break
+                    
                     conexao = random.randint(0, (self.qtdeCidade - 1))
                     if not conexao in cidade.conexoes and not conexao == cidade.id and cidade.id < conexao:
                         cidade.conexoes.append(conexao)
