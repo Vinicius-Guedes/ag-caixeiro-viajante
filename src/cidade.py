@@ -7,6 +7,6 @@ class Cidade:
         self.id = 0
         self.conexoes = list()
     
-    def setCoordenada(self):
+    def setCoordenada(self) -> None:
         self.pontoX = random.randint(1,100)
         self.pontoY = random.randint(1,100)
