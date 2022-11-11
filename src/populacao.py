@@ -28,12 +28,8 @@ class Populacao:
             self.individuos.append(individuo)
     
     def calcularFitness(self, distancias) -> None:
-        def myKey(a):
-            return a.fitness
-
         for individuo in self.individuos:
             fitness = 0
-
             for index, cromossomo in enumerate(individuo.getCromossomo()):
                 if len(individuo.getCromossomo()) == (index + 1):
                     break
@@ -43,13 +39,13 @@ class Populacao:
 
                 fitness += distancias[cidadeA][cidadeB]
 
-            cidadeA = individuo.getCromossomo()[len(individuo.cromossomo) - 1]
+            cidadeA = individuo.getCromossomo()[len(individuo.getCromossomo()) - 1]
             cidadeB = individuo.getCromossomo()[0]
             fitness += distancias[cidadeA][cidadeB]
 
             individuo.fitness = fitness
 
-        self.individuos.sort(key=myKey)
+        self.individuos.sort(key=lambda a: a.fitness)
 
     def addFilhos(self, filho1, filho2) -> None:
         individuo = Individuo()
