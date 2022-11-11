@@ -1,5 +1,4 @@
 import random
-import math
 
 
 class Reproducao:
@@ -13,6 +12,7 @@ class Reproducao:
 
     def reproduzir(self, populacao, qtdeCidades):
         pai1, pai2 = self.melhoresIndividuos(populacao)
+
         # Cruzamento Order Crossover (OX)
         ponto1 = random.randint(0, (qtdeCidades - 3))
         ponto2 = random.randint((ponto1 + 1), (qtdeCidades - 2))
