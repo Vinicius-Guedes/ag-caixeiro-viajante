@@ -6,6 +6,9 @@ class Individuo:
         self.cromossomo = list()
         self.fitness = 0
 
+    def getCromossomo(self):
+        return self.cromossomo.copy()
+
     def cromossomoInicial(self, qtdeCidades) -> None:
         while len(self.cromossomo) < qtdeCidades:
             cidadeAleatoria = random.randint(0, (qtdeCidades - 1))

@@ -12,15 +12,15 @@ class Evolucao:
         self.populacao = Populacao()
         self.populacao.valorTamanho(tamanhoPopulacao)
         self.taxa = 5
-    
+
     def definirParada(self) -> bool:
         if self.limiteGeracoes == 'infinita':
             return False
-        
+
         return self.populacao.geracao >= self.limiteGeracoes
-    
+
     def mutacao(self):
-        for individuo in self.populacao.individuos:
+        for individuo in self.populacao.getIndividuos():
             sorteio = random.randint(0, 100)
             if sorteio < self.taxa:
                 gene1 = random.randint(0, (self.qtdeCidade - 1))
@@ -28,7 +28,7 @@ class Evolucao:
                 while gene1 == gene2:
                     gene2 = random.randint(0, (self.qtdeCidade - 1))
                 individuo.inverterGene(gene1, gene2)
-    
+
     def evoluir(self):
         self.populacao.iniciarPopulacao(self.qtdeCidade)
         self.populacao.calcularFitness(self.geracaoCidades.distancias)

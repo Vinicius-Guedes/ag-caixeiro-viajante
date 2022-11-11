@@ -1,4 +1,5 @@
 import random
+import math
 
 
 class Reproducao:
@@ -6,7 +7,7 @@ class Reproducao:
         self.selecionados = list()
         
     def sortearIndividuos(self, populacao):
-        individuos = populacao.individuos.copy()
+        individuos = populacao.getIndividuos()
 
         for individuoPop in populacao.individuos:
             somaFitness = 0
@@ -34,11 +35,12 @@ class Reproducao:
             ponto2 = None
 
             if ponto1 == 0:
-                ponto2 = random.randint(0, ((qtdeCidades - 2) - (ponto1 + 1))) + (ponto1 + 1)
+                ponto2 = math.floor(random.random() * ((qtdeCidades - 2) - (ponto1 + 1))) + (ponto1 + 1)#random.randint(0, ((qtdeCidades - 2) - (ponto1 + 1))) + (ponto1 + 1)
             else:
-                ponto2 = random.randint(0, ((qtdeCidades - 1) - (ponto1 + 1))) + (ponto1 + 1) # Não subtrai por 1 no random
+                ponto2 = math.floor(random.random() * ((qtdeCidades - 1) - (ponto1 + 1))) + (ponto1 + 1)
 
-            filho1 = filho2 = [None] * qtdeCidades
+            filho1 = [None] * qtdeCidades
+            filho2 = [None] * qtdeCidades
 
             for j in range(ponto1, (ponto2 + 1)):
                 filho1[j] = self.selecionados[i].cromossomo[j]
@@ -55,7 +57,6 @@ class Reproducao:
                 if j == ponto1:
                     break 
 
-                cidadeExiste = None
                 while True:
                     k += 1
 
@@ -76,14 +77,13 @@ class Reproducao:
                 if j == ponto1:
                     break 
 
-                cidadeExiste = None
                 while True:
                     k += 1
 
                     if k == qtdeCidades:
                         k = 0
-                    if self.selecionados[i + 1].cromossomo[k] in filho2:
+                    if self.selecionados[i].cromossomo[k] in filho2:
                         break
-                filho2[j] = self.selecionados[i + 1].cromossomo[k]
+                filho2[j] = self.selecionados[i].cromossomo[k]
 
         populacao.addFilhos(filho1, filho2)
