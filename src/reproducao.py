@@ -5,85 +5,31 @@ import math
 class Reproducao:
     def __init__(self) -> None:
         self.selecionados = list()
-        
-    def sortearIndividuos(self, populacao):
+
+    def melhoresIndividuos(self, populacao):
         individuos = populacao.getIndividuos()
 
-        for individuoPop in populacao.individuos:
-            somaFitness = 0
-
-            for individuo in individuos:
-                somaFitness += individuo.fitness
-
-            sorteio = random.randint(0, somaFitness) # -1
-            posSorteada = -1
-
-            while True:
-                posSorteada += 1
-                sorteio -= individuos[posSorteada].fitness
-                if not sorteio > 0:
-                    break
-
-            self.selecionados.append(individuos[posSorteada])
-            del individuos[posSorteada]
+        return (individuos[0].getCromossomo(), individuos[1].getCromossomo())
 
     def reproduzir(self, populacao, qtdeCidades):
-        self.sortearIndividuos(populacao)
+        pai1, pai2 = self.melhoresIndividuos(populacao)
+        # Cruzamento Order Crossover (OX)
+        ponto1 = random.randint(0, (qtdeCidades - 3))
+        ponto2 = random.randint((ponto1 + 1), (qtdeCidades - 2))
 
-        for i in range(0, populacao.tamanho, 2):
-            ponto1 = random.randint(0, (qtdeCidades - 2))
-            ponto2 = None
+        filho1 = [None] * qtdeCidades
+        filho2 = [None] * qtdeCidades
 
-            if ponto1 == 0:
-                ponto2 = math.floor(random.random() * ((qtdeCidades - 2) - (ponto1 + 1))) + (ponto1 + 1)#random.randint(0, ((qtdeCidades - 2) - (ponto1 + 1))) + (ponto1 + 1)
-            else:
-                ponto2 = math.floor(random.random() * ((qtdeCidades - 1) - (ponto1 + 1))) + (ponto1 + 1)
+        for j in range(ponto1, (ponto2 + 1)):
+            filho1[j] = pai1[j]
+            filho2[j] = pai1[::-1][j]
 
-            filho1 = [None] * qtdeCidades
-            filho2 = [None] * qtdeCidades
+        for i in pai2:
+            if not i in filho1:
+                filho1[filho1.index(None)] = i
 
-            for j in range(ponto1, (ponto2 + 1)):
-                filho1[j] = self.selecionados[i].cromossomo[j]
-                filho2[j] = self.selecionados[i + 1].cromossomo[j]
-
-            j = ponto2
-            k = ponto2
-
-            while True:
-                j += 1
-
-                if j == qtdeCidades:
-                    j = 0
-                if j == ponto1:
-                    break 
-
-                while True:
-                    k += 1
-
-                    if k == qtdeCidades:
-                        k = 0
-                    if self.selecionados[i + 1].cromossomo[k] in filho1:
-                        break
-                filho1[j] = self.selecionados[i + 1].cromossomo[k]
-
-            j = ponto2
-            k = ponto2
-
-            while True:
-                j += 1
-
-                if j == qtdeCidades:
-                    j = 0
-                if j == ponto1:
-                    break 
-
-                while True:
-                    k += 1
-
-                    if k == qtdeCidades:
-                        k = 0
-                    if self.selecionados[i].cromossomo[k] in filho2:
-                        break
-                filho2[j] = self.selecionados[i].cromossomo[k]
+        for i in pai2[::-1]:
+            if not i in filho2:
+                filho2[filho2.index(None)] = i
 
         populacao.addFilhos(filho1, filho2)
