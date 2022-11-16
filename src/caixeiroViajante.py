@@ -8,7 +8,7 @@ class CaixeiroViajante:
     def getGeracaoCidades(self) -> list:
         return self.evolucao.getGeracaoCidades()
 
-    def run(self, log = True) -> None:
+    def run(self, log = True) -> list:
         return self.evolucao.evoluir(log)
 
 if __name__ == '__main__':

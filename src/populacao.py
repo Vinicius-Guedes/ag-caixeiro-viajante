@@ -7,7 +7,7 @@ class Populacao:
        self.individuos = list()
        self.geracao = 1
 
-    def getIndividuos(self):
+    def getIndividuos(self) -> list:
         return self.individuos.copy()
 
     def valorTamanho(self, tamanho) -> None:

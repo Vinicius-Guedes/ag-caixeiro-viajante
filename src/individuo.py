@@ -6,7 +6,7 @@ class Individuo:
         self.cromossomo = list()
         self.fitness = 0
 
-    def getCromossomo(self):
+    def getCromossomo(self) -> list:
         return self.cromossomo.copy()
 
     def cromossomoInicial(self, qtdeCidades) -> None:

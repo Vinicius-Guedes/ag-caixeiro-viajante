@@ -5,12 +5,12 @@ class Reproducao:
     def __init__(self) -> None:
         self.selecionados = list()
 
-    def melhoresIndividuos(self, populacao):
+    def melhoresIndividuos(self, populacao) -> tuple:
         individuos = populacao.getIndividuos()
 
         return (individuos[0].getCromossomo(), individuos[1].getCromossomo())
 
-    def reproduzir(self, populacao, qtdeCidades):
+    def reproduzir(self, populacao, qtdeCidades) -> None:
         pai1, pai2 = self.melhoresIndividuos(populacao)
 
         # Cruzamento Order Crossover (OX)

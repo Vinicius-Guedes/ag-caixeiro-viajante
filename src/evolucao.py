@@ -19,7 +19,7 @@ class Evolucao:
     def definirParada(self) -> bool:
         return self.populacao.geracao >= self.limiteGeracoes
 
-    def mutacao(self):
+    def mutacao(self) -> None:
         for individuo in self.populacao.getIndividuos():
             sorteio = random.randint(0, 100)
             if sorteio < self.taxa:
@@ -29,7 +29,7 @@ class Evolucao:
                     gene2 = random.randint(0, (self.qtdeCidade - 1))
                 individuo.inverterGene(gene1, gene2)
 
-    def evoluir(self, log = True):
+    def evoluir(self, log = True) -> list:
         self.populacao.iniciarPopulacao(self.qtdeCidade)
         self.populacao.calcularFitness(self.geracaoCidades.distancias)
 

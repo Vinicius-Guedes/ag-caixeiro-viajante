@@ -11,7 +11,7 @@ class App(customtkinter.CTk):
     WIDTH = 1024
     HEIGHT = 640
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.title("CustomTkinter complex_example.py")
