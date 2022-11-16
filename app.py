@@ -14,7 +14,7 @@ class App(customtkinter.CTk):
     def __init__(self) -> None:
         super().__init__()
 
-        self.title("CustomTkinter complex_example.py")
+        self.title("Caixeiro Viajante")
         self.geometry(f"{App.WIDTH}x{App.HEIGHT}")
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.resizable(False, False)
