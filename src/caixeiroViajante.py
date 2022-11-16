@@ -1,10 +1,16 @@
 from evolucao import Evolucao
 
 
-QUANTIDADE_CIDADES = 10
-TAMANHO_POPULACAO = 6
-LIMITE_GERACOES = 100
+class CaixeiroViajante:
+    def __init__(self, qtdeCidade, tamanhoPopulacao, limiteGeracoes) -> None:
+        self.evolucao = Evolucao(qtdeCidade, tamanhoPopulacao, limiteGeracoes)
+    
+    def getGeracaoCidades(self) -> list:
+        return self.evolucao.getGeracaoCidades()
 
-evol = Evolucao( QUANTIDADE_CIDADES, TAMANHO_POPULACAO, LIMITE_GERACOES )
+    def run(self, log = True) -> None:
+        return self.evolucao.evoluir(log)
 
-evol.evoluir()
+if __name__ == '__main__':
+    caixeiroViajante = CaixeiroViajante(10, 6, 100)
+    caixeiroViajante.run()

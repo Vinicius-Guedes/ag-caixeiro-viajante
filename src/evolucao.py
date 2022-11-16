@@ -13,6 +13,9 @@ class Evolucao:
         self.populacao.valorTamanho(tamanhoPopulacao)
         self.taxa = 5
 
+    def getGeracaoCidades(self) -> list:
+        return self.geracaoCidades.cidades
+
     def definirParada(self) -> bool:
         return self.populacao.geracao >= self.limiteGeracoes
 
@@ -26,12 +29,13 @@ class Evolucao:
                     gene2 = random.randint(0, (self.qtdeCidade - 1))
                 individuo.inverterGene(gene1, gene2)
 
-    def evoluir(self):
+    def evoluir(self, log = True):
         self.populacao.iniciarPopulacao(self.qtdeCidade)
         self.populacao.calcularFitness(self.geracaoCidades.distancias)
 
         while True:
-            self.populacao.exibirPopulacao()
+            if log:
+                self.populacao.exibirPopulacao()
             if self.definirParada():
                 break
 
@@ -44,4 +48,11 @@ class Evolucao:
             self.populacao.ajustarPopulacao()
             self.populacao.valorGeracao()
 
-        self.populacao.exibirSolucaoEncontrada()
+        if log:
+            self.populacao.exibirSolucaoEncontrada()
+
+        return [
+            self.populacao.geracao, 
+            self.populacao.individuos[0].getCromossomo(),
+            self.populacao.individuos[0].fitness
+        ]
