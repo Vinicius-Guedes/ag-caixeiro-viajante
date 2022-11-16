@@ -1,7 +1,7 @@
 import random
-from geradorCidades import GeradorCidades
-from populacao import Populacao
-from reproducao import Reproducao
+from src.geradorCidades import GeradorCidades
+from src.populacao import Populacao
+from src.reproducao import Reproducao
 
 
 class Evolucao:

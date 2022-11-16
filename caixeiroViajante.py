@@ -1,4 +1,4 @@
-from evolucao import Evolucao
+from src.evolucao import Evolucao
 
 
 class CaixeiroViajante:

@@ -1,4 +1,4 @@
-from cidade import Cidade
+from src.cidade import Cidade
 import math
 
 

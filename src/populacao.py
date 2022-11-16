@@ -1,4 +1,4 @@
-from individuo import Individuo
+from src.individuo import Individuo
 
 
 class Populacao:
