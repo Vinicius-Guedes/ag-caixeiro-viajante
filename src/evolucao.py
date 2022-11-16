@@ -5,7 +5,7 @@ from reproducao import Reproducao
 
 
 class Evolucao:
-    def __init__(self, qtdeCidade, tamanhoPopulacao, limiteGeracoes = 'infinita') -> None:
+    def __init__(self, qtdeCidade, tamanhoPopulacao, limiteGeracoes) -> None:
         self.limiteGeracoes = limiteGeracoes
         self.qtdeCidade = qtdeCidade
         self.geracaoCidades = GeradorCidades( qtdeCidade )
@@ -14,9 +14,6 @@ class Evolucao:
         self.taxa = 5
 
     def definirParada(self) -> bool:
-        if self.limiteGeracoes == 'infinita':
-            return False
-
         return self.populacao.geracao >= self.limiteGeracoes
 
     def mutacao(self):
