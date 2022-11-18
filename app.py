@@ -1,5 +1,5 @@
 import tkinter
-import tkinter.messagebox
+import tkinter.messagebox as mb
 import customtkinter
 from caixeiroViajante import CaixeiroViajante
 
@@ -144,8 +144,11 @@ class App(customtkinter.CTk):
         self.labelIndividuo.destroy()
         self.labelMenorDistancia.destroy()
         self.canvas.delete("all")
+
         if not self.validarInput():
+            mb.showerror(title = "ERRO!", message = "Só são permitidos valores numericos e inteiros nos campos")
             return
+
         caixeiroViajante = CaixeiroViajante(
             int(self.entryCidades.get()),
             int(self.entryPop.get()),
