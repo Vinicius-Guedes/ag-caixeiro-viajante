@@ -5,12 +5,13 @@ from src.reproducao import Reproducao
 
 
 class Evolucao:
-    def __init__(self, qtdeCidade, tamanhoPopulacao, limiteGeracoes) -> None:
+    def __init__(self, qtdeCidade, tamanhoPopulacao, limiteGeracoes, cidadeInicial) -> None:
         self.limiteGeracoes = limiteGeracoes
         self.qtdeCidade = qtdeCidade
         self.geracaoCidades = GeradorCidades( qtdeCidade )
         self.populacao = Populacao()
         self.populacao.valorTamanho(tamanhoPopulacao)
+        self.cidadeInicial = cidadeInicial
         self.taxa = 5
 
     def getGeracaoCidades(self) -> list:
@@ -23,14 +24,14 @@ class Evolucao:
         for individuo in self.populacao.getIndividuos():
             sorteio = random.randint(0, 100)
             if sorteio < self.taxa:
-                gene1 = random.randint(0, (self.qtdeCidade - 1))
-                gene2 = random.randint(0, (self.qtdeCidade - 1))
+                gene1 = random.randint(1, (self.qtdeCidade - 1))
+                gene2 = random.randint(1, (self.qtdeCidade - 1))
                 while gene1 == gene2:
-                    gene2 = random.randint(0, (self.qtdeCidade - 1))
+                    gene2 = random.randint(1, (self.qtdeCidade - 1))
                 individuo.inverterGene(gene1, gene2)
 
     def evoluir(self, log = True) -> list:
-        self.populacao.iniciarPopulacao(self.qtdeCidade)
+        self.populacao.iniciarPopulacao(self.qtdeCidade, self.cidadeInicial)
         self.populacao.calcularFitness(self.geracaoCidades.distancias)
 
         while True:
@@ -40,7 +41,7 @@ class Evolucao:
                 break
 
             reproducao = Reproducao()
-            reproducao.reproduzir(self.populacao, self.qtdeCidade)
+            reproducao.reproduzir(self.populacao, self.qtdeCidade, self.cidadeInicial)
 
             self.mutacao()
 

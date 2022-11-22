@@ -34,7 +34,7 @@ class App(customtkinter.CTk):
         # ============ frame_left ============
 
         self.frame_left.grid_rowconfigure(0, minsize=10)
-        self.frame_left.grid_rowconfigure(6, weight=1)
+        self.frame_left.grid_rowconfigure(7, weight=1)
         self.frame_left.grid_rowconfigure(8, minsize=20)
         self.frame_left.grid_rowconfigure(11, minsize=10)
 
@@ -48,21 +48,26 @@ class App(customtkinter.CTk):
                                             placeholder_text="Qtde. de cidades")
         self.entryCidades.grid(row=2, column=0, pady=10, padx=20)
 
+        self.entryCidadeInicial = customtkinter.CTkEntry(master=self.frame_left,
+                                            width=140,
+                                            placeholder_text="Ponto de partida")
+        self.entryCidadeInicial.grid(row=3, column=0, pady=10, padx=20)
+
         self.entryPop = customtkinter.CTkEntry(master=self.frame_left,
                                             width=140,
                                             placeholder_text="Tamanho da população")
-        self.entryPop.grid(row=3, column=0, pady=10, padx=20)
+        self.entryPop.grid(row=4, column=0, pady=10, padx=20)
 
         self.entryGeracoes = customtkinter.CTkEntry(master=self.frame_left,
                                             width=140,
                                             placeholder_text="Qtde. Gerações")
-        self.entryGeracoes.grid(row=4, column=0, pady=10, padx=20)
+        self.entryGeracoes.grid(row=5, column=0, pady=10, padx=20)
 
         self.btnRun = customtkinter.CTkButton(master=self.frame_left,
                                                 text="Iniciar",
                                                 width=140,
                                                 command=self.button_event)
-        self.btnRun.grid(row=5, column=0, pady=10, padx=20)
+        self.btnRun.grid(row=6, column=0, pady=10, padx=20)
 
         self.label_mode = customtkinter.CTkLabel(master=self.frame_left, text="Appearance Mode:")
         self.label_mode.grid(row=9, column=0, pady=0, padx=20, sticky="w")
@@ -128,11 +133,12 @@ class App(customtkinter.CTk):
             )
 
     def validarInput(self) -> bool:
-        if self.entryCidades.get() == "" or self.entryPop.get() == "" or self.entryGeracoes.get() == "":
+        if self.entryCidades.get() == "" or self.entryPop.get() == "" or self.entryGeracoes.get() == "" or self.entryCidadeInicial.get() == "":
             return False
         
         try:
             int(self.entryCidades.get())
+            int(self.entryCidadeInicial.get())
             int(self.entryPop.get())
             int(self.entryGeracoes.get())
             return True
@@ -152,7 +158,8 @@ class App(customtkinter.CTk):
         caixeiroViajante = CaixeiroViajante(
             int(self.entryCidades.get()),
             int(self.entryPop.get()),
-            int(self.entryGeracoes.get())
+            int(self.entryGeracoes.get()),
+            int(self.entryCidadeInicial.get())
         )
         self.desenhaCidade(caixeiroViajante.getGeracaoCidades())
         resultado = caixeiroViajante.run(False)

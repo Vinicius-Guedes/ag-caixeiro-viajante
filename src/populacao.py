@@ -20,11 +20,11 @@ class Populacao:
     def valorGeracao(self) -> None:
         self.geracao += 1
 
-    def iniciarPopulacao(self, qtdeCidades) -> None:
+    def iniciarPopulacao(self, qtdeCidades, cidadeInicial) -> None:
         for c in range(0, self.tamanho):
             individuo = Individuo()
 
-            individuo.cromossomoInicial(qtdeCidades)
+            individuo.cromossomoInicial(qtdeCidades, cidadeInicial)
             self.individuos.append(individuo)
     
     def calcularFitness(self, distancias) -> None:

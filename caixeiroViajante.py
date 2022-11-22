@@ -2,8 +2,8 @@ from src.evolucao import Evolucao
 
 
 class CaixeiroViajante:
-    def __init__(self, qtdeCidade, tamanhoPopulacao, limiteGeracoes) -> None:
-        self.evolucao = Evolucao(qtdeCidade, tamanhoPopulacao, limiteGeracoes)
+    def __init__(self, qtdeCidade, tamanhoPopulacao, limiteGeracoes, cidadeInicial) -> None:
+        self.evolucao = Evolucao(qtdeCidade, tamanhoPopulacao, limiteGeracoes, cidadeInicial)
     
     def getGeracaoCidades(self) -> list:
         return self.evolucao.getGeracaoCidades()
@@ -12,5 +12,5 @@ class CaixeiroViajante:
         return self.evolucao.evoluir(log)
 
 if __name__ == '__main__':
-    caixeiroViajante = CaixeiroViajante(10, 6, 100)
+    caixeiroViajante = CaixeiroViajante(10, 6, 100, 3)
     caixeiroViajante.run()

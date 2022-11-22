@@ -10,7 +10,7 @@ class Reproducao:
 
         return (individuos[0].getCromossomo(), individuos[1].getCromossomo())
 
-    def reproduzir(self, populacao, qtdeCidades) -> None:
+    def reproduzir(self, populacao, qtdeCidades, cidadeInicial) -> None:
         pai1, pai2 = self.melhoresIndividuos(populacao)
 
         # Cruzamento Order Crossover (OX)
@@ -23,6 +23,9 @@ class Reproducao:
         for j in range(ponto1, (ponto2 + 1)):
             filho1[j] = pai1[j]
             filho2[j] = pai1[::-1][j]
+
+        filho1[0] = cidadeInicial
+        filho2[0] = cidadeInicial
 
         for i in pai2:
             if not i in filho1:
